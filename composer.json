@@ -1,0 +1,24 @@
+{
+    "name": "kongoon/yii2-orgchart",
+    "description": "Google Visualization OrgChart for Yii Framework 2.0",
+    "keywords": ["yii", "yii2", "extension", "google", "Visualization", "OrgChart"],
+    "homepage": "https://github.com/kongoon/yii2-orgchart",
+    "type": "yii2-extension",
+    "license": "BSD 3-Clause",
+    "authors": [
+        {
+            "name": "Manop Kongoon",
+            "email": "kongoon@gmail.com",
+            "homepage": "https://www.programmerthailand.com/"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "kongoon\\orgchart\\": ""
+        }
+    }
+}
