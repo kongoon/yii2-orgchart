@@ -10,7 +10,7 @@ class OrgChart extends Widget
 {
     public $htmlOptions = [];
     public $setupOptions = [];
-    public $options = [];
+    public $data = [];
 
     public function run()
     {
@@ -21,8 +21,8 @@ class OrgChart extends Widget
         }
         echo Html::tag('div', '', $this->htmlOptions);
 
-        if(is_string($this->options)){
-            $this->options = Json::decode($this->options);
+        if(is_string($this->data)){
+            $this->data = Json::decode($this->data);
         }
         $this->registerAsset();
         parent::run();
@@ -30,7 +30,7 @@ class OrgChart extends Widget
 
     protected function registerAsset()
     {
-        $jsOptions = Json::encode($this->options);
+        $jsData = Json::encode($this->data);
         $setupOptions = Json::encode($this->setupOptions);
         $js = "
             google.charts.load('current', {packages:[\"orgchart\"]});
@@ -43,12 +43,13 @@ class OrgChart extends Widget
                 data.addColumn('string', 'ToolTip');
 
                 // For each orgchart box, provide the name, manager, and tooltip to show.
-                data.addRows([
-                    ".$jsOptions."
-                ]);
+                data.addRows(
+                    ".$jsData."
+                );
 
                 // Create the chart.
                 var chart = new google.visualization.OrgChart(document.getElementById('".$this->id."'));
+                chart.draw(data, {allowHtml:true});
             }
         ";
         $this->view->registerJsFile('https://www.gstatic.com/charts/loader.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
